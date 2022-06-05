@@ -97,7 +97,6 @@ def login():
 		clear()
 		ui = getpass('Enter password: ')
 		vault_lock = open('.vault_.lock').read().splitlines()
-		print(vault_lock)
 		status = al104(ui, vault_lock)
 		if(status):
 			clear()
