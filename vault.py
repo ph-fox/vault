@@ -1,5 +1,6 @@
+#!/usr/bin/python3
 import requests, os, time, platform
-from pwinput import pwinput
+from getpass import getpass
 
 url = "https://anikin-api.herokuapp.com/AL104_hash/al104_hash_api.php"
 
@@ -94,7 +95,7 @@ def menu():
 def login():
 	while True:
 		clear()
-		ui = pwinput(prompt='Enter password: ',mask='*')
+		ui = getpass('Enter password: ')
 		vault_lock = open('.vault_.lock').read().strip()
 		status = al104(ui, vault_lock)
 		if(status):
@@ -113,8 +114,8 @@ def check():
 	else:
 		while True:
 			print('Pls setup a new vault password')
-			password = pwinput(prompt='New password: ',mask='-')
-			passwordc = pwinput(prompt='Retype new password: ',mask='-')
+			password = getpass('New password: ')
+			passwordc = getpass('Retype new password: ')
 			if(password==passwordc):
 				r = requests.post(url, data={'encode':password})
 				if(r.status_code==200):
@@ -127,3 +128,4 @@ def check():
 
 if(__name__=="__main__"):
 	check()
+
